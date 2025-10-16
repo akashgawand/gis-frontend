@@ -1,0 +1,368 @@
+/* ===== GLOBAL RESET ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+  color: #1a1a1a;
+  background-color: #f5f7fa;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.map-dashboard {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.map-controls {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 280px;
+  max-height: calc(100vh - 40px);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  z-index: 1000;
+  border: 1px solid rgba(230, 230, 230, 0.8);
+  transition: all 0.3s ease;
+}
+
+.map-controls:hover {
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.16);
+}
+
+.map-controls h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e8eef5;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+/* ===== DRAWING TOOLS BUTTONS ===== */
+.control-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-buttons button {
+  padding: 12px 16px;
+  border: 2px solid transparent;
+  background: #f8f9fb;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #4a5568;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+}
+
+.control-buttons button::before {
+  position: absolute;
+  left: 0; ;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: #007bff;
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.control-buttons button:hover {
+  background: #e8eef5;
+  transform: translateX(2px);
+}
+
+.control-buttons button.active {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border-color: #0056b3;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  transform: translateX(0);
+}
+
+.control-buttons button.active::before {
+  transform: scaleY(1);
+  background: white;
+}
+
+/* ===== MAP CONTAINER - FULL SCREEN ===== */
+.map-container {
+  flex: 1;
+  position: relative;
+  background: #e9ecef;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.map-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ===== GEOMETRIES LIST ===== */
+.geometries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+  max-height: 380px;
+  overflow: hidden;
+}
+
+.geometries-list h3 {
+  margin: 0;
+  padding-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.list-items {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.list-items p {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 20px 10px;
+  margin: 0;
+}
+
+.list-item {
+  padding: 12px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.list-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e0;
+}
+
+.list-item > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.list-item strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.geometry-type {
+  display: inline-block;
+  font-size: 11px;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+/* ===== DELETE BUTTON ===== */
+.delete-btn {
+  padding: 6px 12px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+}
+
+.delete-btn:active {
+  transform: scale(0.98);
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+.map-controls::-webkit-scrollbar,
+.list-items::-webkit-scrollbar {
+  width: 6px;
+}
+
+.map-controls::-webkit-scrollbar-track,
+.list-items::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.map-controls::-webkit-scrollbar-thumb,
+.list-items::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 10px;
+}
+
+.map-controls::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Firefox scrollbar */
+.map-controls,
+.list-items {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 transparent;
+}
+
+/* ===== OPENLAYERS OVERRIDES ===== */
+.ol-viewport {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.ol-overlaycontainer-stopevent {
+  pointer-events: none;
+}
+
+.ol-overlaycontainer-stopevent > * {
+  pointer-events: auto;
+}
+
+/* OL Controls positioning - move to top-right corner */
+.ol-zoom {
+  top: 20px;
+  right: 20px;
+  left: auto;
+}
+
+.ol-attribution {
+  bottom: 8px;
+  right: 8px;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+  .map-controls {
+    width: 240px;
+    top: 10px;
+    left: 10px;
+    max-height: calc(100vh - 20px);
+    padding: 16px;
+  }
+  
+  .control-buttons button {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .geometries-list {
+    max-height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-controls {
+    width: calc(100vw - 20px);
+    max-height: 50vh;
+  }
+}
+
+/* ===== LOADING STATE (optional enhancement) ===== */
+.map-container::before {
+  content: 'Loading map...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  color: #64748b;
+  font-weight: 500;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  animation: fadeIn 0.3s ease 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.map-container canvas ~ * {
+  animation: none;
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+.control-buttons button:focus-visible,
+.delete-btn:focus-visible {
+  outline: 3px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .map-controls {
+    display: none;
+  }
+  
+  .map-container {
+    width: 100%;
+    height: 100%;
+  }
+}
