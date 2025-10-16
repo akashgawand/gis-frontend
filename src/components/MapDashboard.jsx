@@ -24,14 +24,14 @@ const MapDashboard = () => {
     const [currentGeometry, setCurrentGeometry] = useState(null);
     const [geometries, setGeometries] = useState([]);
 
-    // Initialize map with delay to ensure DOM is ready
+ 
     useEffect(() => {
         if (!mapRef.current) {
             console.error('[Map] mapRef is null');
             return;
         }
 
-        // Small delay ensures flex layout completes before OpenLayers reads dimensions
+      
         const initTimer = setTimeout(() => {
             const vectorSource = new VectorSource();
             vectorSourceRef.current = vectorSource;
@@ -57,13 +57,13 @@ const MapDashboard = () => {
 
             mapInstanceRef.current = map;
 
-            // Force map to recalculate size after init
+           
             setTimeout(() => {
                 map.updateSize();
                 console.log('[Map] initialized and sized');
             }, 100);
 
-            // Load existing features
+           
             loadGeometries();
         }, 50);
 
@@ -80,14 +80,14 @@ const MapDashboard = () => {
         };
     }, []);
 
-    // Attach/remove Draw interaction when drawType changes
+  
     useEffect(() => {
         const map = mapInstanceRef.current;
         const source = vectorSourceRef.current;
 
         if (!map || !source) return;
 
-        // Remove previous interaction
+       
         if (drawInteractionRef.current) {
             map.removeInteraction(drawInteractionRef.current);
             drawInteractionRef.current = null;
