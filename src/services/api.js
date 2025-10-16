@@ -1,13 +1,12 @@
 import axios from "axios";
 
-const API_URL = "https://gis-backend-4dcc.onrender.com/api";
+const API_URL = 'https://gis-backend-4dcc.onrender.com/api';
 
 const api = axios.create({
   baseURL: API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  headers: { 'Content-Type': 'application/json' },
 });
+
 
 // Add token to requests
 api.interceptors.request.use(
