@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://github.com/akashgawand/gis-backend/blob/main/server.js";
+const API_URL = "https://github.com/akashgawand/gis-backend/blob/main/server.js/api";
 
 const api = axios.create({
   baseURL: API_URL,
