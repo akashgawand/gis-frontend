@@ -7,7 +7,7 @@ const AdminPanel = () => {
     const { user, hasPermission } = useAuth();
     const [activeTab, setActiveTab] = useState('users');
 
-    // Users state
+
     const [users, setUsers] = useState([]);
     const [showUserForm, setShowUserForm] = useState(false);
     const [editingUser, setEditingUser] = useState(null);
@@ -20,12 +20,10 @@ const AdminPanel = () => {
     const [showRoleForm, setShowRoleForm] = useState(false);
     const [roleForm, setRoleForm] = useState({ name: '', description: '' });
 
-    // Departments state
     const [departments, setDepartments] = useState([]);
     const [showDeptForm, setShowDeptForm] = useState(false);
     const [deptForm, setDeptForm] = useState({ name: '', description: '' });
 
-    // Permissions (static display from roles)
     const permissionsMatrix = {
         'Admin': ['Create', 'Read', 'Update', 'Delete'],
         'Dept. HOD': ['Create', 'Read', 'Update'],
@@ -53,7 +51,6 @@ const AdminPanel = () => {
         }
     };
 
-    // ===== USERS MANAGEMENT =====
     const handleUserSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -113,7 +110,6 @@ const AdminPanel = () => {
         }
     };
 
-    // ===== ROLES MANAGEMENT =====
     const handleRoleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -142,7 +138,6 @@ const AdminPanel = () => {
         }
     };
 
-    // ===== DEPARTMENTS MANAGEMENT =====
     const handleDeptSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -206,7 +201,6 @@ const AdminPanel = () => {
             </div>
 
             <div className="admin-content">
-                {/* USERS TAB */}
                 {activeTab === 'users' && (
                     <div className="section">
                         <div className="section-header">
@@ -255,7 +249,6 @@ const AdminPanel = () => {
                     </div>
                 )}
 
-                {/* ROLES TAB */}
                 {activeTab === 'roles' && (
                     <div className="section">
                         <div className="section-header">
@@ -301,7 +294,6 @@ const AdminPanel = () => {
                     </div>
                 )}
 
-                {/* PERMISSIONS TAB */}
                 {activeTab === 'permissions' && (
                     <div className="section">
                         <h2>Permissions Matrix</h2>
@@ -331,7 +323,6 @@ const AdminPanel = () => {
                     </div>
                 )}
 
-                {/* DEPARTMENTS TAB */}
                 {activeTab === 'departments' && (
                     <div className="section">
                         <div className="section-header">
@@ -372,7 +363,6 @@ const AdminPanel = () => {
                 )}
             </div>
 
-            {/* USER FORM MODAL */}
             {showUserForm && (
                 <div className="modal-overlay" onClick={() => { setShowUserForm(false); setEditingUser(null); }}>
                     <div className="modal" onClick={e => e.stopPropagation()}>
@@ -433,7 +423,6 @@ const AdminPanel = () => {
                 </div>
             )}
 
-            {/* ROLE FORM MODAL */}
             {showRoleForm && (
                 <div className="modal-overlay" onClick={() => setShowRoleForm(false)}>
                     <div className="modal" onClick={e => e.stopPropagation()}>
@@ -461,7 +450,6 @@ const AdminPanel = () => {
                 </div>
             )}
 
-            {/* DEPARTMENT FORM MODAL */}
             {showDeptForm && (
                 <div className="modal-overlay" onClick={() => setShowDeptForm(false)}>
                     <div className="modal" onClick={e => e.stopPropagation()}>
