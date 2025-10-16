@@ -120,7 +120,7 @@ body {
   background: white;
 }
 
-/* ===== MAP CONTAINER - FULL SCREEN ===== */
+
 .map-container {
   flex: 1;
   position: relative;
@@ -135,7 +135,7 @@ body {
   height: 100% !important;
 }
 
-/* ===== GEOMETRIES LIST ===== */
+
 .geometries-list {
   display: flex;
   flex-direction: column;
@@ -240,7 +240,6 @@ body {
   transform: scale(0.98);
 }
 
-/* ===== SCROLLBAR STYLING ===== */
 .map-controls::-webkit-scrollbar,
 .list-items::-webkit-scrollbar {
   width: 6px;
@@ -261,14 +260,13 @@ body {
   background: #94a3b8;
 }
 
-/* Firefox scrollbar */
+
 .map-controls,
 .list-items {
   scrollbar-width: thin;
   scrollbar-color: #cbd5e0 transparent;
 }
 
-/* ===== OPENLAYERS OVERRIDES ===== */
 .ol-viewport {
   position: relative !important;
   width: 100% !important;
@@ -295,7 +293,7 @@ body {
   right: 8px;
 }
 
-/* ===== RESPONSIVE ADJUSTMENTS ===== */
+
 @media (max-width: 768px) {
   .map-controls {
     width: 240px;
@@ -322,7 +320,7 @@ body {
   }
 }
 
-/* ===== LOADING STATE (optional enhancement) ===== */
+
 .map-container::before {
   content: 'Loading map...';
   position: absolute;
@@ -355,7 +353,7 @@ body {
   outline-offset: 2px;
 }
 
-/* ===== PRINT STYLES ===== */
+
 @media print {
   .map-controls {
     display: none;
