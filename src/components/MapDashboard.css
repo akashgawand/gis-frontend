@@ -30,11 +30,10 @@ body {
   overflow: hidden;
 }
 
-
 .map-controls {
   position: absolute;
-  top: 20px;
-  left: 0;
+  top: 10vh;
+  left: 145vh;
   width: 280px;
   max-height: calc(100vh - 40px);
   background: rgba(255, 255, 255, 0.98);
