@@ -63,7 +63,7 @@ const AdminPanel = () => {
                 });
                 alert('User updated successfully!');
             } else {
-                const response = await fetch('http://localhost:5000/api/auth/signup', {
+                const response = await fetch('https://gis-backend-4dcc.onrender.com/api/auth/signup', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
